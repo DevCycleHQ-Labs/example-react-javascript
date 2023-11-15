@@ -2,12 +2,12 @@
 
 An example app built using [Create React App](https://github.com/facebook/create-react-app) and the [DevCycle React SDK](https://docs.devcycle.com/sdk/client-side-sdks/react/)
 
-## Running the example
+## Getting Started
 
 * Run `yarn install` in the project directory to install dependencies
 * Create a `.env` file and set `REACT_APP_DEVCYCLE_CLIENT_SDK_KEY` to the SDK Key for your environment.\
-You can find this under [Settings > Environments](https://app.devcycle.com/r/environments) on the DevCycle dashboard.
-* Create a new feature on the dashboard with a string variable named `greeting` and a boolean variable named `spin-logo`
+You can find this under [Settings > Environments](https://app.devcycle.com/r/environments) on the DevCycle dashboard. [Learn more about environments](https://docs.devcycle.com/essentials/environments).
+* [Create a new feature](https://docs.devcycle.com/introduction/quickstart#2-create-a-feature) on the dashboard with a string variable named `greeting` and a boolean variable named `spin-logo`
 * If you added user targeting to your feature, update the user object `App.js` based on your targeting rules.
 
 ### `yarn start`
@@ -22,3 +22,7 @@ You may also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+## Documentation
+For more information about using the DevCycle React SDK, see [the documentation](https://docs.devcycle.com/sdk/client-side-sdks/react/)
+
