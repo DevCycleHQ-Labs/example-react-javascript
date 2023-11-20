@@ -1,15 +1,25 @@
 import './App.css';
 import { useIsDevCycleInitialized, withDevCycleProvider } from '@devcycle/react-client-sdk';
-import Logo from './components/Logo';
+import ToggleBot from './components/ToggleBot';
 import User from './components/User';
+import users from './data/users'
+
+if (!process.env.REACT_APP_DEVCYCLE_CLIENT_SDK_KEY) {
+  alert('Set your REACT_APP_DEVCYCLE_CLIENT_SDK_KEY environment variable to use the DevCycle React SDK.')
+}
 
 function App() {
+  /**
+   * The useIsDevCycleInitialized hook will return true when the DevCycle client
+   * has finished initializing. Before the client has initialized, all variables
+   * will return the default values.
+   */
   const devcycleReady = useIsDevCycleInitialized();
 
   const appContent = devcycleReady
     ? (
         <>
-          <Logo />
+          <ToggleBot />
           <User />
         </>
       )
@@ -28,18 +38,21 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          DevCycle SDK Docs
+          DevCycle React SDK Docs
         </a>
       </div>
     </div>
   );
 }
 
+/**
+ * Wrapping your app with the DevCycle provider will make the client
+ * available to all child components.
+ * See the documentation for more information:
+ * https://docs.devcycle.com/sdk/client-side-sdks/react/react-gettingstarted#provider-config
+ */
 export default withDevCycleProvider({
   sdkKey: process.env.REACT_APP_DEVCYCLE_CLIENT_SDK_KEY,
-  user: {
-    user_id: 'user1',
-    email: 'initial_user@email.com'
-  },
+  user: users[0], // initialize with user-1
   options: { logLevel: 'debug' }
 })(App);

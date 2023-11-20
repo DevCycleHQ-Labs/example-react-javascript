@@ -4,7 +4,7 @@ import { useIsDevCycleInitialized } from '@devcycle/react-client-sdk';
 
 test('renders docs link', () => {
   render(<App />);
-  const linkElement = screen.getByText(/devcycle sdk docs/i);
+  const linkElement = screen.getByText(/devcycle react sdk docs/i);
   expect(linkElement).toBeInTheDocument();
 });
 
