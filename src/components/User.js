@@ -1,29 +1,43 @@
+import { useRef } from 'react';
 import { useDevCycleClient, useVariableValue } from '@devcycle/react-client-sdk';
+import users from '../data/users'
 
 function User() {
+  const ref = useRef(null)
   const devcycleClient = useDevCycleClient()
-  const greeting = useVariableValue('greeting', 'Hello world!')
+  const greeting = useVariableValue('togglebot-greeting', 'Hello world!')
 
-  const newUser = {
-    user_id: 'user2',
-    email: 'new_user@email.com'
+  /**
+   * Identifying a new user object will retreive new variable values
+   */
+  async function identifyUser(changeEvent) {
+    const userObject = JSON.parse(changeEvent.target.value)
+    await devcycleClient.identifyUser(userObject)
+  }
+
+  /**
+   * Resetting the user will clear the user's identity and retreive new variable values
+   */
+  async function resetUser() {
+    await devcycleClient.resetUser()
+    ref.current.value = '{}'
   }
 
   return (
     <div className="App-user">
-      <p>{greeting}</p>
-      <p>Current user: <b>{devcycleClient.user?.email || 'Anonymous User'}</b></p>
+      <h3>{greeting}</h3>
 
       <div className="App-buttons">
+        <select onChange={identifyUser} className="App-button" ref={ref}>
+          {users.map(user => (
+            <option key={user.user_id} value={JSON.stringify(user)}>{user.name}</option>
+          ))}
+          <option key="anonymous" value="{}">Anonymous User</option>
+        </select>
+
         <button
           className="App-button"
-          onClick={() => devcycleClient.identifyUser(newUser)}
-        >
-          Identify User
-        </button>
-        <button
-          className="App-button"
-          onClick={() => devcycleClient.resetUser()}
+          onClick={resetUser}
         >
           Reset User
         </button>
