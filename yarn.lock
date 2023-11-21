@@ -1285,7 +1285,7 @@
     ua-parser-js "^1.0.36"
     uuid "^8.3.2"
 
-"@devcycle/react-client-sdk@^1.12.2":
+"@devcycle/react-client-sdk@^1.13.2":
   version "1.13.2"
   resolved "https://registry.yarnpkg.com/@devcycle/react-client-sdk/-/react-client-sdk-1.13.2.tgz#b418ab47ba783c0f3e5a57f3f5dd2ea499ed5a72"
   integrity sha512-YFlvE1/j2k0VgkKyoAwaIwKt2vTkTU6AkrO35+wBeMeu267Cj0dRndHIiBVQ7U5TQpBH/WT8MpGexVz7kFzLfQ==
