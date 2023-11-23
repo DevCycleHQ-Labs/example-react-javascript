@@ -1,7 +1,7 @@
 /**
  * Modify the user properties to see how they interact with you feature targeting rules
  */
-export default [
+const users = [
   {
     user_id: 'user-1',
     name: 'User 1',
@@ -18,3 +18,4 @@ export default [
     email: 'user3@email.com'
   }
 ]
+export default users
