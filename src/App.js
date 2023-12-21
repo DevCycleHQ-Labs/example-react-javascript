@@ -54,5 +54,9 @@ function App() {
 export default withDevCycleProvider({
   sdkKey: process.env.REACT_APP_DEVCYCLE_CLIENT_SDK_KEY,
   user: users[0], // initialize with user-1
-  options: { logLevel: 'debug' }
+  options: {
+    logLevel: 'debug',
+    // This is added for demo purposes. The default 10s is sufficent for most apps
+    eventFlushIntervalMS: 1000
+  }
 })(App);
