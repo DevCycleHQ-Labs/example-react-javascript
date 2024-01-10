@@ -10,7 +10,8 @@ function ToggleBot() {
   const shouldWink = useVariableValue('togglebot-wink', false)
   const spinSpeed = useVariableValue('togglebot-speed', 'off')
 
-  const { variationName = 'Default' } = devcycleClient.config.features['hello-togglebot'] ?? {}
+  const features = devcycleClient.allFeatures()
+  const { variationName = 'Default' } = features['hello-togglebot'] ?? {}
 
   return (
     <div className="App-content">
