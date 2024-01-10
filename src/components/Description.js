@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { useDevCycleClient } from '@devcycle/react-client-sdk';
 
 function Description() {
   const devcycleClient = useDevCycleClient()
-
-  const variationKey = devcycleClient.config.features['hello-togglebot']?.variationKey
+  const [variationKey, setVariationKey] = useState(getVariationKey(devcycleClient))
+  devcycleClient.subscribe('configUpdated', () => {
+    setVariationKey(getVariationKey(devcycleClient))
+  })
 
   return (
     <div className="App-description">
@@ -18,6 +21,11 @@ function Description() {
       </a>
     </div>
   );
+}
+
+const getVariationKey = (devcycleClient) => {
+  const features = devcycleClient.allFeatures()
+  return features['hello-togglebot']?.variationKey
 }
 
 const getMessage = (variationKey) => {
@@ -48,7 +56,7 @@ const getMessage = (variationKey) => {
         <>
           <h3>Welcome to DevCycle's example app.</h3>
           <p>
-            Follow the instructions in the onboarding flow to change and create new Variations and see how the app reacts to new Variable values.
+            If you got here through the onboarding flow, just follow the instructions to change and create new Variations and see how the app reacts to new Variable values.
           </p>
         </>
       )
