@@ -1,16 +1,11 @@
-import { useState } from 'react';
-import { useDevCycleClient } from '@devcycle/react-client-sdk';
+import { useVariableValue } from '@devcycle/react-client-sdk';
 
 function Description() {
-  const devcycleClient = useDevCycleClient()
-  const [variationKey, setVariationKey] = useState(getVariationKey(devcycleClient))
-  devcycleClient.subscribe('configUpdated', () => {
-    setVariationKey(getVariationKey(devcycleClient))
-  })
+  const speed = useVariableValue('togglebot-speed', 'off')
 
   return (
     <div className="App-description">
-      {getMessage(variationKey)}
+      {getMessage(speed)}
       <a
         className="App-link"
         href="https://docs.devcycle.com/sdk/client-side-sdks/react/"
@@ -23,23 +18,21 @@ function Description() {
   );
 }
 
-const getVariationKey = (devcycleClient) => {
-  const features = devcycleClient.allFeatures()
-  return features['hello-togglebot']?.variationKey
-}
-
-const getMessage = (variationKey) => {
-  switch (variationKey) {
-    case undefined:
+const getMessage = (speed) => {
+  switch (speed) {
+    case 'off':
       return (
         <>
           <h3>Welcome to DevCycle's example app.</h3>
           <p>
-            Follow our README guide to create the Feature and Variables you need to control this app in DevCycle.
+            If you got here through the onboarding flow, just follow the instructions to change and create new Variations and see how the app reacts to new Variable values.
+          </p>
+          <p>
+            If you got to the example app on your own, follow our README guide to create the Feature and Variables you need to control this app in DevCycle.
           </p>
         </>
       )
-    case 'variation-wink':
+    case 'slow':
       return (
         <>
           <h3>Great! You've taken the first step in exploring DevCycle.</h3>
@@ -51,16 +44,7 @@ const getMessage = (variationKey) => {
           </p>
         </>
       )
-    case 'variation-base':
-      return (
-        <>
-          <h3>Welcome to DevCycle's example app.</h3>
-          <p>
-            If you got here through the onboarding flow, just follow the instructions to change and create new Variations and see how the app reacts to new Variable values.
-          </p>
-        </>
-      )
-    default: // custom variation
+    default:
       return (
         <>
           <h3>You're getting the hang of things.</h3>
