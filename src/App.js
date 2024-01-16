@@ -3,9 +3,14 @@ import { useIsDevCycleInitialized, withDevCycleProvider } from '@devcycle/react-
 import ToggleBot from './components/ToggleBot';
 import Description from './components/Description';
 
-if (!process.env.REACT_APP_DEVCYCLE_CLIENT_SDK_KEY) {
+const query = new URLSearchParams(window.location.search);
+const querySdkKey = query.get('devcycle_sdk_key');
+
+if (!querySdkKey && !process.env.REACT_APP_DEVCYCLE_CLIENT_SDK_KEY) {
   alert('Set your REACT_APP_DEVCYCLE_CLIENT_SDK_KEY environment variable to use the DevCycle React SDK.')
 }
+
+const devcycleSdkKey = querySdkKey || process.env.REACT_APP_DEVCYCLE_CLIENT_SDK_KEY;
 
 function App() {
   /**
@@ -46,7 +51,7 @@ function App() {
  * https://docs.devcycle.com/sdk/client-side-sdks/react/react-gettingstarted#provider-config
  */
 export default withDevCycleProvider({
-  sdkKey: process.env.REACT_APP_DEVCYCLE_CLIENT_SDK_KEY,
+  sdkKey: devcycleSdkKey,
   /**
    * Modify this user object to see how targeting is affected
    */
