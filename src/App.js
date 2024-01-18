@@ -5,6 +5,7 @@ import Description from './components/Description';
 
 const query = new URLSearchParams(window.location.search);
 const querySdkKey = query.get('devcycle_sdk_key');
+const hideBackground = query.get('hide_background') === 'true';
 
 if (!querySdkKey && !process.env.REACT_APP_DEVCYCLE_CLIENT_SDK_KEY) {
   alert('Set your REACT_APP_DEVCYCLE_CLIENT_SDK_KEY environment variable to use the DevCycle React SDK.')
@@ -30,15 +31,15 @@ function App() {
     : <h2>Initializing...</h2>
 
   return (
-    <div className="App">
-      <div className="App-header">
+    <div className={`App ${!hideBackground ? 'gradient-background' : ''}`}>
+      {!hideBackground && <div className="App-header">
         <p>Demo Application</p>
         <img
           height="46"
           src="/devcycle-togglebot-full-colour.svg"
           alt="DevCycle"
         />
-      </div>
+      </div>}
       {appContent}
     </div>
   );
