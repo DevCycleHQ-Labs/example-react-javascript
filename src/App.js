@@ -31,7 +31,7 @@ function App() {
     : <h2>Initializing...</h2>
 
   return (
-    <div className={`App ${!hideBackground ? 'gradient-background' : ''}`}>
+    <div className={`App ${!hideBackground ? 'gradient-background vertical-center' : ''}`}>
       {!hideBackground && <div className="App-header">
         <p>Demo Application</p>
         <img
